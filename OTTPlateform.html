@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTT Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #666;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .section {
+            width: 30%;
+            margin: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        .section img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-bottom: 1px solid #ddd;
+        }
+        .section-content {
+            padding: 10px;
+        }
+        .movie-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .movie-description {
+            font-size: 14px;
+            color: #666;
+        }
+        #detailsModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            overflow: auto;
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 5px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>OTT Platform Movies</h1>
+    </header>
+    <nav>
+        <a href="#">Home</a> |
+        <a href="#">Movies</a> |
+        <a href="#">Series</a> |
+        <a href="#">My List</a> |
+        <input type="text" id="searchInput" placeholder="Search...">
+    </nav>
+    <main id="content">
+        <!-- Trending Movies Section -->
+        <div class="section" onclick="showDetails('PUSHPA', 'Description of Movie 1.')">
+            <img src="C:\Users\91988\OneDrive\Desktop\Web Techology\image\wp11468802-pushpa-the-rise-part-1-wallpapers (1).jpg" alt="Movie 1">
+            <div class="section-content">
+                <p class="movie-title">PUSHPA</p>
+                <p class="movie-description">Description of PUSHPA.</p>
+            </div>
+        </div>
+        <div class="section" onclick="showDetails('RRR', 'Description of Movie 2.')">
+            <img src="C:\Users\91988\OneDrive\Desktop\Web Techology\image\wp10944811-rrr-poster-wallpapers.jpg" alt="Movie 2">
+            <div class="section-content">
+                <p class="RRR-title">RRR</p>
+                <p class="movie-description">Description of RRR.</p>
+            </div>
+        </div>
+        <!-- Add more sections for trending movies, series, etc. -->
+
+        <!-- Content Details Modal -->
+        <div id="detailsModal">
+            <div class="modal-content">
+                <span class="close" onclick="hideDetails()">&times;</span>
+                <h2 id="modalTitle"></h2>
+                <p id="modalDescription"></p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showDetails(title, description) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('detailsModal').style.display = 'block';
+        }
+
+        function hideDetails() {
+            document.getElementById('detailsModal').style.display = 'none';
+        }
+
+        document.getElementById('searchInput').addEventListener('input', function() {
+            let searchQuery = this.value.toLowerCase();
+            let sections = document.querySelectorAll('.section');
+
+            sections.forEach(section => {
+                let title = section.querySelector('.movie-title').textContent.toLowerCase();
+                let description = section.querySelector('.movie-description').textContent.toLowerCase();
+                if (title.includes(searchQuery) || description.includes(searchQuery)) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
